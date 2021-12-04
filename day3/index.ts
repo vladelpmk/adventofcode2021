@@ -1,15 +1,13 @@
 import { readFileSync } from "fs";
+import { flipMajorDiagonal } from "../utils/matrix";
 
 const file = readFileSync("day3/input.txt").toString("utf-8");
 const input = file.split("\n");
 
 
-var flipMajorDiagonal = function (matrix) {
-  return matrix[0].map((column, index) => matrix.map((row) => row[index]));
-};
-
 let oxygenOutput = input.map((r) => r.split("").map((i) => parseInt(i)));
 let bitPosition = 0;
+
 // part 2 
 while (oxygenOutput.length > 1) {
   const flippedOutput = flipMajorDiagonal(oxygenOutput);
@@ -56,26 +54,26 @@ console.log(
 );
 
 // part 1
-// let gammaBinary = [], epsilonBinary = [];
+let gammaBinary = [], epsilonBinary = [];
 
-// const flippedInput = flipMajorDiagonal(input.map(r => (r.split("").map((i) => parseInt(i)))))
+const flippedInput = flipMajorDiagonal(input.map(r => (r.split("").map((i) => parseInt(i)))))
 
-// for (let i = 0; i < flippedInput.length; i++) {
-//     if (
-//       flippedInput[i].filter((i) => i === 0).length <
-//       flippedInput[i].filter((i) => i === 1).length
-//     ) {
-//         gammaBinary.push(1);
-//         epsilonBinary.push(0);
-//     }
-//     if (
-//       flippedInput[i].filter((i) => i === 0).length >
-//       flippedInput[i].filter((i) => i === 1).length
-//     ) {
-//         gammaBinary.push(0);
-//         epsilonBinary.push(1);
-//     }
-// }
+for (let i = 0; i < flippedInput.length; i++) {
+    if (
+      flippedInput[i].filter((i) => i === 0).length <
+      flippedInput[i].filter((i) => i === 1).length
+    ) {
+        gammaBinary.push(1);
+        epsilonBinary.push(0);
+    }
+    if (
+      flippedInput[i].filter((i) => i === 0).length >
+      flippedInput[i].filter((i) => i === 1).length
+    ) {
+        gammaBinary.push(0);
+        epsilonBinary.push(1);
+    }
+}
 
-// console.log(parseInt(gammaBinary.join(''), 2) * parseInt(epsilonBinary.join(''), 2))
+console.log(parseInt(gammaBinary.join(''), 2) * parseInt(epsilonBinary.join(''), 2))
 
