@@ -6,26 +6,26 @@ const input = file.split(/\n\s*\n/);
 
 const [drawString, ...boardsString] = input;
 
-
 const draw = drawString.split(",").map((i) => parseInt(i));
 const boards = boardsString.map((i) =>
   i.split("\n").map((j) =>
-    j.split(" ")
-     .filter(m => m !== "")
-     .map((k) => parseInt(k)),
+    j
+      .split(" ")
+      .filter((m) => m !== "")
+      .map((k) => parseInt(k)),
   ),
 );
 
 const boardWins = (board, draw) => {
-    for (let row of board) {
-      if (row.every((j) => draw.includes(j))) {
-        return true;
-      }
+  for (let row of board) {
+    if (row.every((j) => draw.includes(j))) {
+      return true;
+    }
   }
 
   const flippedBoard = flipMajorDiagonal(board);
 
-    for (let row of flippedBoard) {
+  for (let row of flippedBoard) {
     if (row.every((j) => draw.includes(j))) {
       return true;
     }
@@ -46,48 +46,52 @@ const calculateBoardSum = (board, draw) => {
       }
     });
   return sum;
-}
+};
 
-let winningBoard 
+let winningBoard;
 let i = 4;
- 
+
 for (; i < draw.length; i++) {
-    for (let board of boards) {
-        if (boardWins(board, draw.slice(0, i))) {
-             winningBoard = board;
-             break;
-        }
-    }
-    if (winningBoard) {
+  for (let board of boards) {
+    if (boardWins(board, draw.slice(0, i))) {
+      winningBoard = board;
       break;
     }
+  }
+  if (winningBoard) {
+    break;
+  }
 }
-console.log(`part 1 ${calculateBoardSum(winningBoard, draw.slice(0, i)) * draw[i - 1]}`);
+console.log(
+  `part 1 ${calculateBoardSum(winningBoard, draw.slice(0, i)) * draw[i - 1]}`,
+);
 
 let losingBoards = boards;
 i = 4;
 
 for (; i < draw.length; i++) {
-    let winningBoards = []
-    
+  let winningBoards = [];
 
-    for (let j = 0; j < losingBoards.length; j++) {
-        if (draw[i-1] === 34) {
-           
-        }
-
-        if (boardWins(losingBoards[j], draw.slice(0, i))) {
-            winningBoards.push(j);
-        }
+  for (let j = 0; j < losingBoards.length; j++) {
+    if (draw[i - 1] === 34) {
     }
 
-    if (losingBoards.length === 1 && winningBoards.length === 1) {
-      break;
+    if (boardWins(losingBoards[j], draw.slice(0, i))) {
+      winningBoards.push(j);
     }
+  }
 
-    losingBoards = losingBoards.filter((i, index) =>
-      !winningBoards.includes(index),
-    );
+  if (losingBoards.length === 1 && winningBoards.length === 1) {
+    break;
+  }
+
+  losingBoards = losingBoards.filter(
+    (i, index) => !winningBoards.includes(index),
+  );
 }
 
-console.log(`part 2 ${calculateBoardSum(losingBoards[0], draw.slice(0, i)) * draw[i - 1]}`);
+console.log(
+  `part 2 ${
+    calculateBoardSum(losingBoards[0], draw.slice(0, i)) * draw[i - 1]
+  }`,
+);
