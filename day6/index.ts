@@ -25,5 +25,5 @@ const calculateForDays = (initial, days) => {
   return optimizedFish.reduce((acc, item) => acc + item, 0);
 };
 
-console.log(`part 1: ${calculateForDays(fish, 200)}`);
-console.log(`part 2: ${calculateForDays(fish, 256)}`);
+console.log(`Part 1: ${calculateForDays(fish, 200)}`);
+console.log(`Part 2: ${calculateForDays(fish, 256)}`);

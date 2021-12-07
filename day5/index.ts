@@ -18,7 +18,7 @@ const plot1 = new Plot();
 
 plot1.addLines(lines.filter((l) => l.p1.x === l.p2.x || l.p1.y === l.p2.y));
 console.log(
-  "part 1",
+  "Part 1",
   plot1
     .getPlot()
     .flat()
@@ -28,7 +28,7 @@ console.log(
 const plot2 = new Plot();
 plot2.addLines(lines);
 console.log(
-  "part 2",
+  "Part 2",
   plot2
     .getPlot()
     .flat()

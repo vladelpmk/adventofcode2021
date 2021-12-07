@@ -25,7 +25,7 @@ for (let i = 0; i < input.length; i++) {
   }
 }
 
-console.log(`part1: ${x * depth}`);
+console.log(`Part 1: ${x * depth}`);
 
 //Part 2
 (x = 0), (depth = 0);
@@ -50,4 +50,4 @@ for (let i = 0; i < input.length; i++) {
   }
 }
 
-console.log(`part2: ${x * depth}`);
+console.log(`Part 2: ${x * depth}`);

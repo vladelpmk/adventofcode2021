@@ -21,4 +21,4 @@ for (let i = 0; i < input.length; i++) {
   }
 }
 
-console.log(`part1: ${deeper1}`, `part2: ${deeper2}`);
+console.log(`Part 1: ${deeper1}`, `Part 2: ${deeper2}`);

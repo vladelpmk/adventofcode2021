@@ -63,7 +63,7 @@ for (; i < draw.length; i++) {
   }
 }
 console.log(
-  `part 1 ${calculateBoardSum(winningBoard, draw.slice(0, i)) * draw[i - 1]}`,
+  `Part 1 ${calculateBoardSum(winningBoard, draw.slice(0, i)) * draw[i - 1]}`,
 );
 
 let losingBoards = boards;
@@ -91,7 +91,7 @@ for (; i < draw.length; i++) {
 }
 
 console.log(
-  `part 2 ${
+  `Part 2 ${
     calculateBoardSum(losingBoards[0], draw.slice(0, i)) * draw[i - 1]
   }`,
 );
