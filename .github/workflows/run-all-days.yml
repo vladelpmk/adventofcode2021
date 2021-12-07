@@ -2,16 +2,20 @@ name: Run all days
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - run: npm i
-
+      - uses: actions/checkout@v2
+      - run: DAY=day1 npm run day
+      - run: DAY=day2 npm run day
+      - run: DAY=day3 npm run day
+      - run: DAY=day4 npm run day
+      - run: DAY=day5 npm run day
+      - run: DAY=day6 npm run day
+      - run: DAY=day7 npm run day
