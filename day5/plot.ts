@@ -28,7 +28,7 @@ export class Plot {
   };
 
   public getPlot = () => {
-    let plot = [];
+    let plot: any[] = [];
     for (let y = 0; y <= this.maxY; y++) {
       plot.push([...Array(this.maxX + 1).fill(0)]);
     }
@@ -44,7 +44,7 @@ export class Plot {
   public toString = () => {
     const plot = this.getPlot();
     return plot
-      .map((i) => i.map((j) => (j === 0 ? "." : j)).join(""))
+      .map((i) => i.map((j: number) => (j === 0 ? "." : j)).join(""))
       .join("\n");
   };
 }

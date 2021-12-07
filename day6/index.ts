@@ -5,7 +5,7 @@ const input = file.split(",");
 
 let fish = input.map((i) => parseInt(i));
 
-const calculateForDays = (initial, days) => {
+const calculateForDays = (initial: number[], days: number) => {
   let optimizedFish = new Array(9).fill(0);
   initial.forEach((i) => {
     optimizedFish[i]++;

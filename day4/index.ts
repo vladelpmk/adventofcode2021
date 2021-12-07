@@ -16,7 +16,7 @@ const boards = boardsString.map((i) =>
   ),
 );
 
-const boardWins = (board, draw) => {
+const boardWins = (board: number[][], draw: number[]) => {
   for (let row of board) {
     if (row.every((j) => draw.includes(j))) {
       return true;
@@ -33,8 +33,7 @@ const boardWins = (board, draw) => {
 
   return false;
 };
-
-const calculateBoardSum = (board, draw) => {
+const calculateBoardSum = (board: number[][], draw: number[]) => {
   let sum = 0;
   board
     .join()
@@ -48,7 +47,7 @@ const calculateBoardSum = (board, draw) => {
   return sum;
 };
 
-let winningBoard;
+let winningBoard: number[][] | undefined;
 let i = 4;
 
 for (; i < draw.length; i++) {
@@ -63,14 +62,17 @@ for (; i < draw.length; i++) {
   }
 }
 console.log(
-  `Part 1 ${calculateBoardSum(winningBoard, draw.slice(0, i)) * draw[i - 1]}`,
+  `Part 1 ${
+    calculateBoardSum(winningBoard as number[][], draw.slice(0, i)) *
+    draw[i - 1]
+  }`,
 );
 
 let losingBoards = boards;
 i = 4;
 
 for (; i < draw.length; i++) {
-  let winningBoards = [];
+  let winningBoards: number[] = [];
 
   for (let j = 0; j < losingBoards.length; j++) {
     if (draw[i - 1] === 34) {

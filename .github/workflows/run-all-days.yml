@@ -7,17 +7,25 @@ on:
     branches: [main]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
       - run: npm i
       - run: DAY=day1 npm run day
+        continue-on-error: true
       - run: DAY=day2 npm run day
+        continue-on-error: true
       - run: DAY=day3 npm run day
+        continue-on-error: true
       - run: DAY=day4 npm run day
+        continue-on-error: true
       - run: DAY=day5 npm run day
+        continue-on-error: true
       - run: DAY=day6 npm run day
+        continue-on-error: true
       - run: DAY=day7 npm run day
+        continue-on-error: true
       - run: DAY=day7 npm run day
+        continue-on-error: true

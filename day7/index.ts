@@ -1,19 +1,21 @@
 import { readFileSync } from "fs";
 
 const file = readFileSync("day7/input.txt").toString("utf-8");
-var input = file.split(",").map((i) => parseInt(i));
+const input = file.split(",");
 
 var fuel = 0;
 
-while (!input.every((i) => i === input[0])) {
-  const max = Math.max(...input);
-  const min = Math.min(...input);
+var positions = input.map((i) => parseInt(i));
 
-  const maxItems = input.filter((i) => i === max).length;
-  const minItems = input.filter((i) => i === min).length;
+while (!positions.every((i) => i === positions[0])) {
+  const max = Math.max(...positions);
+  const min = Math.min(...positions);
+
+  const maxItems = positions.filter((i) => i === max).length;
+  const minItems = positions.filter((i) => i === min).length;
 
   if (maxItems <= minItems) {
-    input = input.map((i) => {
+    positions = positions.map((i) => {
       if (i === max) {
         fuel++;
         return i - 1;
@@ -23,7 +25,7 @@ while (!input.every((i) => i === input[0])) {
   }
 
   if (maxItems >= minItems) {
-    input = input.map((i) => {
+    positions = positions.map((i) => {
       if (i === min) {
         fuel++;
         return i + 1;
@@ -35,7 +37,9 @@ while (!input.every((i) => i === input[0])) {
 
 console.log(`Part 1: ${fuel}`);
 
-const getFuel = (start, end) => {
+positions = input.map((i) => parseInt(i));
+
+const getFuel = (start: number, end: number) => {
   let sum = 0;
   for (let i = 0; i <= Math.abs(start - end); i++) {
     sum = sum + i;
@@ -43,13 +47,13 @@ const getFuel = (start, end) => {
   return sum;
 };
 
-const max = Math.max(...input);
-const min = Math.min(...input);
+const max = Math.max(...positions);
+const min = Math.min(...positions);
 
 let opt = [];
 
 for (let i = min; i <= max; i++) {
-  opt.push(input.map((j) => getFuel(j, i)).reduce((k, acc) => k + acc, 0));
+  opt.push(positions.map((j) => getFuel(j, i)).reduce((k, acc) => k + acc, 0));
 }
 
 console.log(`Part 2: ${Math.min(...opt.map((i) => i))}`);
