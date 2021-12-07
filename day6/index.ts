@@ -6,17 +6,10 @@ const input = file.split(",");
 let fish = input.map((i) => parseInt(i));
 
 const calculateForDays = (initial, days) => {
-  let optimizedFish = [
-    initial.filter((i) => i === 0).length,
-    initial.filter((i) => i === 1).length,
-    initial.filter((i) => i === 2).length,
-    initial.filter((i) => i === 3).length,
-    initial.filter((i) => i === 4).length,
-    initial.filter((i) => i === 5).length,
-    initial.filter((i) => i === 6).length,
-    initial.filter((i) => i === 7).length,
-    initial.filter((i) => i === 8).length,
-  ];
+  let optimizedFish = new Array(9).fill(0);
+  initial.forEach((i) => {
+    optimizedFish[i]++;
+  });
 
   for (var day = 1; day <= days; day++) {
     let newFishState = new Array(9).fill(0);
