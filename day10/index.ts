@@ -5,15 +5,16 @@ const input = file.split("\n");
 
 const pairs = [/\[\]/g, /\{\}/g, /\(\)/g, /\<\>/g];
 
-const opening = ["[", "{", "(", "<"];
-const closing = ["]", "}", ")", ">"];
+const opening: string[] = ["[", "{", "(", "<"];
+const closing: string[] = ["]", "}", ")", ">"];
 
-let illegals: String[] = [];
-let additions: String[][] = [];
+let illegals: string[] = [];
+let additions: string[][] = [];
 
-input.forEach((line) => {
-  let stop = false;
-  while (!stop) {
+for (let l = 0; l < input.length; l++) {
+  let line: string = input[l];
+
+  while (true) {
     const previousLength = line.length;
 
     for (let i = 0; i < pairs.length; i++) {
@@ -21,48 +22,46 @@ input.forEach((line) => {
     }
 
     if (line.length === previousLength) {
-      stop = true;
+      break;
     }
+  }
+
+  if (line.length === 0) {
+    break;
   }
 
   // corrupted lines
-  if (line.length !== 0 || line.split("").some((r) => closing.includes(r))) {
-    const parts = line.split("");
-    for (var i = 0; i < parts.length; i++) {
-      if (closing.indexOf(parts[i]) !== -1) {
-        illegals.push(parts[i]);
-        break;
-      }
-    }
+  if (closing.some((r) => line.includes(r))) {
+    illegals.push(
+      line.split("").find((char) => closing.indexOf(char) !== -1) as string,
+    );
   }
 
   // incomplete lines
-  if (line.length !== 0 && !closing.some((r) => line.includes(r))) {
-    const parts = line.split("");
-    const closeWith: String[] = [];
-    for (var i = parts.length - 1; i >= 0; i--) {
-      closeWith.push(closing[opening.indexOf(parts[i])]);
-    }
-    additions.push(closeWith);
+  if (!closing.some((r) => line.includes(r))) {
+    additions.push(
+      line
+        .split("")
+        .reverse()
+        .map((i) => closing[opening.indexOf(i)]),
+    );
   }
-});
-
-const convertedIllegals: number[] = illegals.map((i) => {
-  switch (i) {
-    case ")":
-      return 3;
-    case "]":
-      return 57;
-    case "}":
-      return 1197;
-    case ">":
-      return 25137;
-  }
-  return 0;
-});
+}
 
 console.log(
-  `Part 1: ${convertedIllegals.reduce((acc, item) => acc + item, 0)}`,
+  `Part 1: ${illegals.reduce((acc, item): number => {
+    switch (item) {
+      case ")":
+        return acc + 3;
+      case "]":
+        return acc + 57;
+      case "}":
+        return acc + 1197;
+      case ">":
+        return acc + 25137;
+    }
+    return acc;
+  }, 0)}`,
 );
 
 let convertedAdditions: number[] = [];
