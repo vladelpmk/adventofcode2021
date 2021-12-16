@@ -2,10 +2,8 @@ import { readFileSync } from "fs";
 
 const file = readFileSync("day15/input.txt").toString("utf-8");
 const input = file.split("\n").map((i) => i.split("").map((i) => parseInt(i)));
-const grid = file.split("\n").map((i) => i.split("").map((i) => parseInt(i))); /// REMOVE
 
-
-const getShortestPath = (times:number = 1) => {
+const getShortestPath = (times: number = 1) => {
   const width = input[0].length * times;
   const height = input.length * times;
 
@@ -14,7 +12,7 @@ const getShortestPath = (times:number = 1) => {
       return (
         ((input[i % input.length][j % input[0].length] +
           Math.floor(i / input.length) +
-          Math.floor(j / grid[0].length) -
+          Math.floor(j / input[0].length) -
           1) %
           9) +
         1
@@ -52,7 +50,7 @@ const getShortestPath = (times:number = 1) => {
     }
   }
   return scoreMap[height - 1][width - 1];
-}
+};
 
 console.log(`Part 1: ${getShortestPath()}`);
 console.log(`Part 2: ${getShortestPath(5)}`);
